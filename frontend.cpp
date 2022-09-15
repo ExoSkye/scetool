@@ -282,7 +282,10 @@ static BOOL _fill_npdrm_config(self_config_t *sconf)
 		printf("[*] Error: Please specify a content ID.\n");
 		return FALSE;
 	}
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-truncation"
 	strncpy((s8 *)sconf->npdrm_config->content_id, _content_id, 0x30);
+#pragma GCC diagnostic pop
 
 	if(_real_fname == NULL)
 	{

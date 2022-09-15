@@ -353,7 +353,7 @@ static u32 _sce_get_oh_len(sce_buffer_ctxt_t *ctxt)
 
 void _sce_fixup_ctxt(sce_buffer_ctxt_t *ctxt)
 {
-	u32 i = 0, base_off, last_off;
+	u32 i = 0, base_off = 0, last_off = 0;
 
 	//Set section info data.
 	base_off = ctxt->sceh->header_len;
@@ -468,9 +468,12 @@ void _sce_fixup_keys(sce_buffer_ctxt_t *ctxt)
 
 	time(&rawtime);
 	ti = localtime(&rawtime);
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-overflow="
 	sprintf(buf, "%02d%02d%02d::%02d%02d%04d", 
 		ti->tm_hour, ti->tm_min, ti->tm_sec, 
 		ti->tm_mday, ti->tm_mon, ti->tm_year+1900);
+#pragma GCC diagnostic pop
 
 	memcpy(ctxt->keys + 0x20, "SURPRIZE :D "/**/, 12);
 	memcpy(ctxt->keys + 0x30, "IM IN UR KEYZ !!", 16);
@@ -844,7 +847,10 @@ BOOL sce_decrypt_header(sce_buffer_ctxt_t *ctxt, u8 *metadata_info, u8 *keyset)
 	else
 	{
 		//Copy provided metadata info over SELF metadata.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsizeof-pointer-memaccess"
 		memcpy((u8 *)ctxt->metai, metadata_info, sizeof(metadata_info));
+#pragma GCC diagnostic pop
 	}
 
 	if(ctxt->metai->key_pad[0] != 0x00 || ctxt->metai->iv_pad[0] != 0x00)
