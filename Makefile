@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -O0 -Wall
+CFLAGS=-O2 -Wall -fno-exceptions
 OS_TARGET=scetool
 LDFLAGS=-lz
 OBJS=aes.o aes_omac.o bn.o ec.o ecdsa.o frontend.o getopt.o keys.o list.o \
