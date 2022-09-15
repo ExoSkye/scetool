@@ -58,7 +58,11 @@ u8 *_read_buffer(const s8 *file, u32 *length)
 	fseek(fp, 0, SEEK_SET);
 
 	u8 *buffer = (u8 *)malloc(sizeof(u8) * size);
+	
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wunused-result"
 	fread(buffer, sizeof(u8), size, fp);
+	#pragma GCC diagnostic pop
 
 	if(length != NULL)
 		*length = size;

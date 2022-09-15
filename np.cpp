@@ -236,7 +236,10 @@ BOOL np_sign_file(s8 *fname)
 		fclose(fp);
 		return FALSE;
 	}
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wunused-result"
 	fread(buffer, sizeof(u8), length, fp);
+	#pragma GCC diagnostic pop
 
 	//Generate header hash.
 	sha1(buffer, length, hash);

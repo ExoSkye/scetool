@@ -439,7 +439,7 @@ void frontend_encrypt(s8 *file_in, s8 *file_out)
 {
 	BOOL can_compress = FALSE;
 	self_config_t sconf;
-	sce_buffer_ctxt_t *ctxt;
+	sce_buffer_ctxt_t *ctxt = nullptr;
 	u32 file_len = 0;
 	u8 *file;
 

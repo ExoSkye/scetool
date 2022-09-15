@@ -214,7 +214,10 @@ BOOL keys_load(const s8 *kfile)
 	{
 		//Get next line.
 		lbuf[0] = 0;
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wunused-result"
 		fgets(lbuf, LINEBUFSIZE, fp);
+		#pragma GCC diagnostic pop
 		lblen = strlen(lbuf);
 
 		//Don't parse empty lines (ignore '\n') and comment lines (starting with '#').
